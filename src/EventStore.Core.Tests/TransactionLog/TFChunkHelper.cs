@@ -41,6 +41,7 @@ namespace EventStore.Core.Tests.TransactionLog {
 				new InMemoryCheckpoint(-1),
 				new InMemoryCheckpoint(-1),
 				new InMemoryCheckpoint(-1),
+				inMemDb: true,
 				maxTruncation: maxTruncation);
 		}
 

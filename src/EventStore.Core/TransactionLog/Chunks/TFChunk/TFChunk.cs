@@ -1327,12 +1327,12 @@ namespace EventStore.Core.TransactionLog.Chunks.TFChunk {
 
 			// Skip index and type variance checks which is inserted by runtime typically because
 			// the array element is of reference type.
-			private static ref ReaderWorkItem UnsafeGetElement(ReaderWorkItem[] array, int index)
-			{
-				Debug.Assert((uint)index < (uint)array.Length);
+			//private static ref ReaderWorkItem UnsafeGetElement(ReaderWorkItem[] array, int index)
+			//{
+			//	Debug.Assert((uint)index < (uint)array.Length);
 
-				return ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(array), index);
-			}
+			//	return ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(array), index);
+			//}
 
 			// releases all available slots in the pool
 			internal int Drain(ref int referenceCount) {
@@ -1343,7 +1343,7 @@ namespace EventStore.Core.TransactionLog.Chunks.TFChunk {
 					int count = _indices.Take(indices);
 
 					foreach (var index in indices.Slice(0, count)) {
-						ref ReaderWorkItem slot = ref UnsafeGetElement(array, index);
+						ref ReaderWorkItem slot = ref array[index];
 						slot?.Dispose();
 						slot = null;
 
@@ -1381,7 +1381,7 @@ namespace EventStore.Core.TransactionLog.Chunks.TFChunk {
 				internal readonly int Index;
 
 				public Slot(ReaderWorkItem[] array, int index) {
-					ValueRef = ref UnsafeGetElement(array, index);
+					ValueRef = ref array[index];
 					Index = index;
 				}
 			}
