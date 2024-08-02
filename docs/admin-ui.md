@@ -4,27 +4,27 @@ title: Admin UI
 
 # Admin UI
 
-The EventStoreDB Admin UI is available at _SERVER_IP:2113_ and helps you interact with and manage a cluster in a visual way. This guide explains the tabs of the interface and what they do.
+The EventStoreDB Admin UI is available at _SERVER_IP:2113_ and helps you visually interact with and manage a cluster. This guide explains the tabs of the interface and what they do.
 
 ::: tip
-The embedded EventStoreDB web interface is reaching its end of life. We are working on a replacement, and you can try using the Early Preview of [Event Store Navigator](https://learn.eventstore.com/event-store-navigator-preview) app instead. It doesn't have full feature parity with the embedded web UI, but it already has usability improvements compared to it.
+The embedded EventStoreDB Admin UI web interface is reaching its end of life. You can try using the Early Preview of [Event Store Navigator](https://learn.eventstore.com/event-store-navigator-preview) app instead. It doesn't have full feature parity with the embedded web UI, but you will find some usability improvements already in place.
 :::
 
 ## Dashboard
 
 ![Web admin interface dashboard](./images/wai-dashboard.png)
 
-The _Dashboard_ tab shows an overview of active queues with associated statistics in the top half. The _+_ icon indicates a queue group, click it to reveal the queues that are part of the group.
+The top portion of the _Dashboard_ tab provides an overview of active queues with associated statistics. The _+_ icon indicates a queue group. Clicking any  _+_ icon reveals the queues associated with the group.
 
-The second half of the tab shows active connections to EventStoreDB and information about them.
+The bottom portion of the tab provides information about the active connections to EventStoreDB.
 
-Click the _Snapshot_ button in the top right to output a snapshot of all queue statistics at the time you clicked the button.
+Clicking the _Snapshot_ button in the upper right will produce a snapshot of all current queue statistics.
 
 ## Stream browser
 
 ![Web admin interface stream browser tab](./images/wai-stream-browser.png)
 
-The _Stream Browser_ tab gives an overview of recently created and changed streams, clicking on an individual stream shows details about the individual stream.
+The _Stream Browser_ tab provides an overview of recently created and changed streams. Click on any individual stream name to access the stream details.
 
 ### Event stream
 
@@ -39,7 +39,7 @@ The buttons on the top right when you are viewing an event stream are:
 - _Edit ACL_: Edit [the access control lists](security.md#access-control-lists) for a stream.
 - _Add Event_: [Add a new event](@clients/http-api/README.md#appending-events) to the stream.
 - _Delete_: [Delete a stream](@clients/http-api/README.md#deleting-a-stream) to the stream.
-- _Query_:
+- _Query_: Open code editor field for quick analysis of your event streams.
 
 The buttons on the left above the events when you are viewing an event stream are:
 
