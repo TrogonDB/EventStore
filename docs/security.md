@@ -1280,7 +1280,7 @@ Signature Hash: 6d922badaba2372070f13c69b620286262eab1d8d2d2156a271a1d73aaaf64e4
 
 ## Encryption-At-Rest <Badge type="warning" vertical="middle" text="Commercial"/>
 
-The Encryption-At-Rest plugin allows users to encrypt their EventStoreDB database. Currently, only chunk files are encrypted - the indexes are not. The primary objective is to protect against an attacker who obtains access to the physical disk. In contrast to volume level encryption, file level encryption provides some degree of protection for attacks against the live system or remote exploits as the plaintext data is not directly readable. Protecting against memory-dump based attacks is out of the scope of this plugin.
+The Encryption-At-Rest plugin allows users to encrypt their EventStoreDB database. Currently, only chunk files are encrypted - the indexes are not. The primary objective is to protect against an attacker who obtains access to the physical disk. In contrast to volume or filesystem encryption, file level encryption provides some degree of protection for attacks against the live system or remote exploits as the plaintext data is not directly readable. Protecting against memory-dump based attacks is out of the scope of this plugin.
 
 ### Encryption Algorithm
 
@@ -1290,7 +1290,6 @@ Data is encrypted using a symmetric-key encryption algorithm.
 The plugin is designed to support different encryption algorithms. Currently, the following encryption algorithms are implemented:
 - `AesGcm` - Advanced Encryption Standard (AES) Galois Counter Mode (GCM)
   - The default key size is 256 bits, but 128-bit and 192-bit keys are also supported.
-  - FIPS 140-2 compliant
 
 ### Master Key
 
@@ -1324,31 +1323,31 @@ A JSON configuration file (e.g. `encryption-config.json`)  needs to be added in 
 
 ```
 {
-	"EventStore": {
-		"Plugins": {
-			"EncryptionAtRest": {
-				"Enabled": true,
-				"MasterKey": {
-					"File": {
-						"KeyPath": "/path/to/keys/"
-					}
-				},
-				"Encryption": {
-					"AesGcm": {
-						"Enabled": true,
-						"KeySize": 256 # optional. supported key sizes: 128, 192, 256 (default)
-					}
-				}
-			}
-		}
-	}
+  "EventStore": {
+    "Plugins": {
+      "EncryptionAtRest": {
+        "Enabled": true,
+        "MasterKey": {
+          "File": {
+            "KeyPath": "/path/to/keys/"
+          }
+        },
+        "Encryption": {
+          "AesGcm": {
+            "Enabled": true,
+            "KeySize": 256 # optional. supported key sizes: 128, 192, 256 (default)
+          }
+        }
+      }
+    }
+  }
 }
 ```
 
 The `Transform` configuration parameter must be specified in the server's configuration file:
 
 ```
-Transform: AesGcm
+Transform: aes-gcm
 ```
 
 When using the `File` master key source, a master key must be generated using [es-genkey-cli](https://github.com/EventStore/es-genkey-cli) and placed in the configured `KeyPath` directory. The master key having the highest ID will be chosen as the active one.
